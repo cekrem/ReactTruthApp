@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import common from '../styles/common'
+
 
 const Truth = ({color, text}) => (
-  <View style={[common.fullscreen, {backgroundColor: color}]}>
+  <View style={[styles.layout, {backgroundColor: color}]}>
     <Text style={styles.text}>
       {text}
     </Text>
@@ -14,6 +14,13 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
   },
+
+  layout: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+  },
+
 })
 
 export default Truth

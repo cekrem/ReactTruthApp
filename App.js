@@ -1,39 +1,50 @@
 import React from 'react'
-import Truth from './components/Truth'
+import { Animated } from 'react-native'
 import Swiper from 'react-native-swiper'
+import Truth from './components/Truth'
+import Data from './mock.json'
 
 export default class App extends React.Component {
   state = {
-    truths: [
-      {
-        id: 1,
-        text: 'lorem ipsum',
-        color: 'yellow',
-      },
-      {
-        id: 2,
-        text: 'lorem Hipsum',
-        color: 'blue',
-      },
-    ],
+    opacity: new Animated.Value(0),
+    truths: [],
   }
 
-  shuffleTruths = () => this.setState(state => (
-    {
-      ...state,
-      truths: state.truths.map(el => [el, Math.random()]).
-        sort((a, b) => a[1] - b[1]).
-        map(arrWithRand => arrWithRand[0]),
-    }
-  ))
+  componentWillMount () {
+    this.loadTruths()
+  }
+
+  loadTruths = () => {
+    setTimeout(() => {
+      this.setTruths(Data.truths)
+    }, 1000)
+  }
+
+  setTruths = (truths) => {
+    this.setState({
+      truths,
+    })
+
+    Animated.timing(
+      this.state.opacity,
+      {
+        toValue: 1,
+        duration: 200,
+      },
+    ).start()
+  }
 
   render () {
+    const {truths, opacity} = this.state
+
     return (
-      <Swiper>
-        {this.state.truths.map(({text, color, id}) =>
-          <Truth key={id} color={color} text={text}></Truth>,
-        )}
-      </Swiper>
+      <Animated.View style={{flex: 1, opacity}}>
+        <Swiper showsPagination={false}>
+          {truths.map(({text, color, id}) =>
+            <Truth key={color} color={color} text={text}/>,
+          )}
+        </Swiper>
+      </Animated.View>
     )
   }
 }
