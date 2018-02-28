@@ -1,5 +1,5 @@
 import React from 'react'
-import { Animated, View } from 'react-native'
+import { Animated, TouchableOpacity, View } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Data from './mock.json'
 import Truth from './components/Truth'
@@ -40,17 +40,19 @@ export default class App extends React.Component {
 
     return (
       <View style={{flex: 1}}>
-        <Header text={'Truth!'}></Header>
+        <Header text={'Truth?'} style={{top: 0}}></Header>
         <Animated.View style={{flex: 1, opacity}}>
           <Swiper showsPagination={false}>
-            {truths.map(({text, color, id}) =>
-              <Truth key={color} color={color} text={text}/>,
+            {truths.map(({text, color}) =>
+              <Truth key={text} color={color} text={text}/>,
             )}
           </Swiper>
         </Animated.View>
+        <TouchableOpacity>
+          <Header text={'Amen!'} style={{bottom: 0}}></Header>
+        </TouchableOpacity>
       </View>
     )
-
   }
 }
 

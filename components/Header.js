@@ -1,8 +1,8 @@
 import React from 'react'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 
-const Header = ({text}) => (
-  <View style={styles.layout}>
+const Header = ({text, style}) => (
+  <View style={[styles.layout, style]}>
     <Text style={styles.text}>
       {text}
     </Text>
@@ -10,24 +10,23 @@ const Header = ({text}) => (
 )
 
 const styles = StyleSheet.create({
-  text: {
-    textAlign: 'center',
-    padding: 32,
-    color: 'whitesmoke',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    fontSize: 48,
-    fontFamily: Platform.OS === 'ios' ? 'Futura' : 'roboto',
-  },
-
   layout: {
     position: 'absolute',
-    left:0,
+    height: 128,
+    backgroundColor: 'rgba(255,255,255,0.5)',
+    left: 0,
     right: 0,
     zIndex: 2,
     justifyContent: 'center',
     alignItems: 'stretch',
   },
 
+  text: {
+    textAlign: 'center',
+    color: 'whitesmoke',
+    fontSize: 48,
+    fontFamily: Platform.OS === 'ios' ? 'Futura' : 'roboto',
+  },
 })
 
 export default Header
