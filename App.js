@@ -1,8 +1,9 @@
 import React from 'react'
-import { Animated } from 'react-native'
+import { Animated, View } from 'react-native'
 import Swiper from 'react-native-swiper'
-import Truth from './components/Truth'
 import Data from './mock.json'
+import Truth from './components/Truth'
+import Header from './components/Header'
 
 export default class App extends React.Component {
   state = {
@@ -38,14 +39,18 @@ export default class App extends React.Component {
     const {truths, opacity} = this.state
 
     return (
-      <Animated.View style={{flex: 1, opacity}}>
-        <Swiper showsPagination={false}>
-          {truths.map(({text, color, id}) =>
-            <Truth key={color} color={color} text={text}/>,
-          )}
-        </Swiper>
-      </Animated.View>
+      <View style={{flex: 1}}>
+        <Header text={'Truth!'}></Header>
+        <Animated.View style={{flex: 1, opacity}}>
+          <Swiper showsPagination={false}>
+            {truths.map(({text, color, id}) =>
+              <Truth key={color} color={color} text={text}/>,
+            )}
+          </Swiper>
+        </Animated.View>
+      </View>
     )
+
   }
 }
 
