@@ -1,5 +1,5 @@
 import React from 'react'
-import { Animated, TouchableOpacity, View } from 'react-native'
+import { Animated, TouchableOpacity } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Data from './mock.json'
 import Truth from './components/Truth'
@@ -35,23 +35,31 @@ export default class App extends React.Component {
     ).start()
   }
 
+  handlePress = () => {
+    this.swiper.scrollBy(1)
+  }
+
   render () {
     const {truths, opacity} = this.state
 
     return (
-      <View style={{flex: 1}}>
+
+      <Animated.View style={{flex: 1, opacity}}>
         <Header text={'Truth?'} style={{top: 0}}></Header>
-        <Animated.View style={{flex: 1, opacity}}>
-          <Swiper showsPagination={false}>
+
+        {truths.length ? (
+          <Swiper ref={(swiper) => {this.swiper = swiper;}} showsPagination={false}>
             {truths.map(({text, color}) =>
               <Truth key={text} color={color} text={text}/>,
             )}
           </Swiper>
-        </Animated.View>
-        <TouchableOpacity>
+        ) : null}
+
+        <TouchableOpacity onPress={this.handlePress}>
           <Header text={'Amen!'} style={{bottom: 0}}></Header>
         </TouchableOpacity>
-      </View>
+      </Animated.View>
+
     )
   }
 }
