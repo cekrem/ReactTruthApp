@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     color: 'whitesmoke',
     fontSize: 24,
     padding: 12,
-    margin: 12,
+    margin: 24,
     fontFamily: Platform.OS === 'ios' ? 'Futura' : 'roboto',
     backgroundColor: 'rgba(0,0,0,0.5)',
     zIndex: 3
