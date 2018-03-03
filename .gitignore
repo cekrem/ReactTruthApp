@@ -17,5 +17,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # builds
-ios/
-android/
+ios/**/*
+android/**/*
