@@ -9,7 +9,6 @@ export default class App extends React.Component {
   state = {
     opacity: new Animated.Value(0),
     truths: [],
-    index: 0,
   }
 
   componentWillMount () {
@@ -38,32 +37,11 @@ export default class App extends React.Component {
   }
 
   handlePress = () => {
-    this.swiper.scrollBy(1)
-  }
-
-  handleSlideChange = (index) => {
-    this.setState(state => (
-      {
-        ...state,
-        prevIndex: state.index,
-        index,
-      }
-    ))
-
-    this.reloadOnLoop(index)
-  }
-
-  reloadOnLoop = (index) => {
-    setTimeout(() => {
-      if (index !== this.state.index) {
-        this.reloadOnLoop(index)
-      }
-
-      if ((index === 0) &&
-        (this.state.prevIndex === (this.state.truths.length - 1))) {
-        this.loadTruths()
-      }
-    }, 100)
+    const {index, total} = this.swiper.state
+    this.loadTruths()
+    if (index <= total) {
+      this.loadTruths()
+    }
   }
 
   render () {
@@ -77,7 +55,7 @@ export default class App extends React.Component {
 
           {truths.length ? (
             <Swiper ref={(swiper) => {this.swiper = swiper}}
-                    onIndexChanged={this.handleSlideChange}
+                    loop={false}
                     showsPagination={false}>
               {truths.map(({text, color}) =>
                 <Truth key={text} color={color} text={text}/>,
