@@ -3,13 +3,13 @@
     "name": "Truth?",
     "icon": "./app-icon.png",
     "version": "1.0.0",
-    "slug": "your-app-slug",
+    "slug": "truth",
     "sdkVersion": "25.0.0",
     "ios": {
-      "bundleIdentifier": "no.dcapps.truth"
+      "bundleIdentifier": "no.dcapps.truthapp"
     },
     "android": {
-      "package": "no.dcapps.truth"
+      "package": "no.dcapps.truthapp"
     }
   }
 }
